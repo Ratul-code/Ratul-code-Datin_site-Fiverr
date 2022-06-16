@@ -32,7 +32,7 @@ const Login = () => {
     },
     onSubmit: async (values,{resetForm}) => {
       try {
-        const {data} =  await instance.post("/auth/login",{
+        const {data} =  await instance.post("https://ave-dating-site.herokuapp.com/auth/login",{
           ...values
         });
         dispatch(getAccessToken(data.token))

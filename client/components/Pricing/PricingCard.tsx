@@ -57,7 +57,7 @@ const PricingCard = ({pricing}:any) => {
         </div>
         <div className='px-5 w-full my-3'>
         <Button onClick={async ()=>{
-            const {data} = await instance.post("http://localhost:8000/subs/session",{
+            const {data} = await instance.post("/subs/session",{
                 priceId:pricing.id
             },
             {

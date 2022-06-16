@@ -8,7 +8,7 @@ const Membership = ({prices}:any) => {
   const {user} = useAppSelector(state=>state);
   return (
     <MainLayout>
-        <Pricing prices={prices}/>
+        {prices && <Pricing prices={prices}/>}
     </MainLayout>
   )
 }

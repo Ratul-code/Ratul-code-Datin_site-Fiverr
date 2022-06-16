@@ -12,7 +12,7 @@ const Feed = () => {
   useEffect(()=>{
     const fetchUser = async()=>{
       console.log(user.token)
-      const data = await axios.get("http://localhost:8000/users/getPlan",{
+      const data = await axios.get("https://ave-dating-site.herokuapp.com/users/getPlan",{
         headers:{
           Authorization:`${user.token}`
         },

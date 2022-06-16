@@ -21,8 +21,8 @@ exports.createSession = async (req,res,next)=>{
                     quantity:1
                 }
             ],
-            success_url:"https://dating-website-lyart.vercel.app/profile/2",
-            cancel_url:"https://dating-website-lyart.vercel.app/membership",
+            success_url:`${process.env.CLIENT_SITE}/profile/2`,
+            cancel_url:`${process.env.CLIENT_SITE}/membership`,
             customer:req.user.stripeCustomerId
         },
         {

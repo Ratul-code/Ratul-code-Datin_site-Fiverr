@@ -17,7 +17,7 @@ export default Membership
 
 
 export async function getStaticProps() {
-  const plans = await axios.get("http://localhost:8000/subs/prices")
+  const plans = await axios.get("https://ave-dating-site.herokuapp.com/subs/prices")
 const activePlans = plans.data.data.filter((plan:any)=>plan.active===true)
   return {
     props: {prices:activePlans}, 

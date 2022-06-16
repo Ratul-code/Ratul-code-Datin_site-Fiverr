@@ -44,7 +44,7 @@ const Register = () => {
     },
     onSubmit: async (values,{resetForm}) => {
       try {
-        const {data} =  await axios.post("http://localhost:8000/auth/register",{
+        const {data} =  await axios.post("https://ave-dating-site.herokuapp.com/auth/register",{
           ...values
         });
         dispatch(getAccessToken(data.token))

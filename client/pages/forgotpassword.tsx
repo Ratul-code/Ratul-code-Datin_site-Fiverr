@@ -3,7 +3,7 @@ import AuthenticationLayout from "../components/AuthenticationLayout";
 import { FormikProps, useFormik } from "formik";
 import Button from "../components/Button";
 import * as Yup from "yup";
-import router from "next/router";
+import {useRouter} from "next/router";
 import loginPage from "../styles/Login.module.css";
 interface loginProps {
   email: string;

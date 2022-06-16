@@ -1,0 +1,7 @@
+.footer_links  a{
+padding: 1px;
+}
+.footer_links  a:hover{
+    color: #1769aa;
+    /* border-bottom: 1px solid #ADD8E6; */
+}

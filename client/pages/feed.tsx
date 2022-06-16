@@ -5,23 +5,16 @@ import FeedBody from '../components/FeedBody'
 import FilterPaper from '../components/FilterPaper'
 import MainLayout from '../components/MainLayout'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
+import { fetchUserPlan } from '../redux/slices/userSlice'
 import instance from '../utils/axios'
 const Feed = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const {user} = useAppSelector(state=>state);
   useEffect(()=>{
-    const fetchUser = async()=>{
-      console.log(user.token)
-      const data = await instance.get("/users/getPlan",{
-        headers:{
-          Authorization:`${user.token}`
-        },
-      });
-      console.log(data.data);
-    } 
-    fetchUser()
+    dispatch(fetchUserPlan(user.token));
   },[])
+  console.log(user.plan);
   if(!user.token){
     router.replace("/login");
     return 

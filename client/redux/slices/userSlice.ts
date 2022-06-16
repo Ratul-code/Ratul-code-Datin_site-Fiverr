@@ -1,10 +1,24 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ActionReducerMapBuilder,createSlice, PayloadAction,createAsyncThunk } from "@reduxjs/toolkit";
+import instance from "../../utils/axios";
 interface userSliceStateType{
-    token:string
+    token:string,
+    plan:string,
 }
 const initialState:userSliceStateType = {
-    token:""
+    token:"",
+    plan:""
 }
+
+
+export const fetchUserPlan = createAsyncThunk("measure",async (token:string)=>{
+    const {data} = await instance.get("/user/getPlan",{
+        headers:{
+            Authorization:token
+        }
+    });
+    return data.plan
+});
+
 const userSlice = createSlice({
     name:"user",
     initialState,
@@ -15,6 +29,12 @@ const userSlice = createSlice({
         logout(state){
             state.token = ""
         }
+    },
+    extraReducers:(builder:ActionReducerMapBuilder<userSliceStateType>)=>{
+        builder
+        .addCase(fetchUserPlan.fulfilled ,(state,action)=>{
+            state.plan = action.payload
+        })
     }
 })
 

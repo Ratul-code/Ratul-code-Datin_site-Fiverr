@@ -2,13 +2,16 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import navbar from "./Navbar.module.css";
 import Link from "next/link";
-import Button from "../../Button";
+import Button from "../Button";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/router";
-const Navbar = () => {
+interface navbarProps{
+  isBlack:boolean
+}
+const Navbar = ({isBlack=false}) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [bgBlack,setBgBlack] = useState(false);
+  const [bgBlack,setBgBlack] = useState(isBlack);
 
   useEffect(()=>{
     const handleScroll = (e:Event)=>{
@@ -18,11 +21,13 @@ const Navbar = () => {
       else {
         setBgBlack(false);
     }
-    console.log(window.scrollY)
     }
-    window.addEventListener("scroll",handleScroll)
-    return ()=>{
-      window.removeEventListener("scroll",handleScroll)
+    if(!isBlack){
+      console.log("hello")
+      window.addEventListener("scroll",handleScroll)
+      return ()=>{
+        window.removeEventListener("scroll",handleScroll)
+      }
     }
   },[])
   return (

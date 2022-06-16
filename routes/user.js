@@ -1,6 +1,5 @@
 const passport = require("passport");
 const { getUser,getPlan } = require("../controllers/user");
-const { checkAuth } = require("../middlewares/checkAuth");
 
 const router = require("express").Router();
 

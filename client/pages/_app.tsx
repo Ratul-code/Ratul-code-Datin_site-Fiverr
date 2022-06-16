@@ -10,9 +10,6 @@ import { useEffect } from "react";
 const persistor = persistStore(store);
 
 function MyApp({ Component, pageProps }: AppProps) {
-  // useEffect(()=>{
-  //   console.log("hello")
-  // },[])
   return (
     <>
       <Head>

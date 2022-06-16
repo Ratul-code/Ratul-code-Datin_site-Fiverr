@@ -8,7 +8,7 @@ const Pricing = ({prices}:any) => {
             <h1 className='text-center text-[35px] tracking-wide font-semibold'>Plans & Pricing</h1>
             <p className='text-[20px] text-center text-secondary tracking-wide font-semibold capitalize'>Be our gold member for 4 consecutive months to become our VIP membership </p>
         </div>
-        <div className='flex justify-between items-start gap-6 w-full'>
+        <div className='flex justify-center md:justify-start items-start gap-6 w-full flex-wrap md:flex-nowrap px-4'>
           <PricingCard pricing={prices[1]} />
           <PricingCard pricing={prices[0]} />
           <PricingCard pricing={prices[2]} />

@@ -2,7 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '../../redux/hooks';
 import Button from "../Button";
+import {useRouter} from "next/router";
 const PricingCard = ({pricing}:any) => {
+    const router = useRouter();
     const {user} = useAppSelector(state=>state);
     const [benefits,setBenefits] = useState<string[]>();
     useEffect(()=>{
@@ -36,9 +38,8 @@ const PricingCard = ({pricing}:any) => {
         }
         setBenefits(benefits);
     },[])
-    console.log(pricing)
   return (
-    <div className={`${pricing.nickname==="Silver" && "translate-y-[-30px]"} flex flex-col mt-5 gap-5 w-full max-w-[390px] flex-wrap items-center p-4 border-[1px] border-solid border-gray-300 shadow-lg rounded-xl`}>
+    <div className={`${pricing.nickname==="Silver" && "translate-y-0 md:translate-y-[-30px]"} flex flex-col mt-5 gap-5  max-w-[390px] items-center p-4 border-[1px] border-solid border-gray-300 shadow-lg rounded-xl`}>
         <div className='mt-4'>
             <h1 className={`tracking-wider text-center text-[40px] font-sans font-bold `}>{pricing.nickname}</h1>
             <p className=' mt-4 text-lg text-secondary font-sans text-center '>Become a member and enjoy the benefits</p>
@@ -64,8 +65,8 @@ const PricingCard = ({pricing}:any) => {
                 }
             }
             )
-            console.log(data.url);
-            window.location.replace(data.url);
+            
+            window.location.replace(data.url)
         }} fullWidth bg='#1769aa' btnType='outline' >BUY PLAN</Button>
         </div>
     </div>

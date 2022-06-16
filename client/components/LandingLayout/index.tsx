@@ -1,14 +1,17 @@
 import React, { Children } from 'react'
-import Navbar from "./Navbar";
+import Navbar from "../Navbar";
 import Footer from "../Footer";
+import { useAppSelector } from '../../redux/hooks';
+import MainNavbar from '../MainNavbar';
 
 interface layoutPropType{
     children:React.ReactNode
 }
 const index = ({children}:layoutPropType) => {
+  const {user} = useAppSelector(state=>state);
   return (
     <>
-        <Navbar/>
+        {user.token?<MainNavbar/>:<Navbar/>}
         <main>
             {children}
         </main>

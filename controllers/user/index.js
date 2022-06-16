@@ -3,6 +3,8 @@ const { stripe } = require("../../utils/stripe")
 exports.getUser = (req,res,next)=>{
     res.json({user:req.user})
 }
+
+
 exports.getPlan = async (req,res,next)=>{
     const subscriptionData = await stripe.subscriptions.list(
         {

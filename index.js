@@ -30,7 +30,7 @@ require("./config/passport")(passport)
 
 // Routes
 app.use("/auth", require("./routes/auth"));
-app.use("/users", require("./routes/user"));
+app.use("/user", require("./routes/user"));
 app.use("/subs", require("./routes/subs"));
 
 

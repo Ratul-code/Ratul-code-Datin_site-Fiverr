@@ -1,3 +1,4 @@
+const ErrorResponse = require("../../utils/errorResponse");
 const { stripe } = require("../../utils/stripe")
 
 exports.getPrices = async (req,res,next)=>{
@@ -10,6 +11,30 @@ exports.getPrices = async (req,res,next)=>{
 
 
 exports.createSession = async (req,res,next)=>{
+
+
+
+    // const {plan} = req.body
+    // const subscriptionData = await stripe.subscriptions.list(
+    //     {
+    //         customer:req.user.stripeCustomerId,
+    //         status:"all",
+    //         expand:["data.default_payment_method"]
+    //     },
+    //     {
+    //         apiKey:process.env.STRIPE_SECRET_KEY
+    //     }
+    // )
+    // if(subscriptionData.data.length){
+    //     let sameplan=subscriptionData.data.find(subs=>subs.plan.nickname===plan);
+    //     if(sameplan){
+    //         return next(new ErrorResponse(`You have already our ${plan} membership`))
+    //     }
+    // }
+
+
+
+
     const session = await stripe.checkout.sessions.create(
         {
             mode:"subscription",
@@ -27,5 +52,8 @@ exports.createSession = async (req,res,next)=>{
         {
         apiKey:process.env.STRIPE_SECRET_KEY
     })
-    res.json(session)
+    if(session){
+       return res.json(session)
+    }
+    return res.json();
 };

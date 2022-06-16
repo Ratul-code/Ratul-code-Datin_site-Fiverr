@@ -2,10 +2,10 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import navbar from "./MainNavbar.module.css";
 import Link from "next/link";
-import Button from "../../Button";
+import Button from "../Button";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/router";
-import ProfileAvatar from "../../ProfileAvatar";
+import ProfileAvatar from "../ProfileAvatar";
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const MainNavbar = () => {
   const router = useRouter();

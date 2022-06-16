@@ -7,7 +7,7 @@ import MainNavbar from '../MainNavbar';
 interface layoutPropType{
     children:React.ReactNode
 }
-const index = ({children}:layoutPropType) => {
+const LandingLayout = ({children}:layoutPropType) => {
   const {user} = useAppSelector(state=>state);
   return (
     <>
@@ -20,4 +20,4 @@ const index = ({children}:layoutPropType) => {
   )
 }
 
-export default index
+export default LandingLayout

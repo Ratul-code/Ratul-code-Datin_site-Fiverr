@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '../../redux/hooks';
 import Button from "../Button";
 import {useRouter} from "next/router";
+import instance from '../../utils/axios';
 const PricingCard = ({pricing}:any) => {
     const router = useRouter();
     const {user} = useAppSelector(state=>state);
@@ -56,7 +57,7 @@ const PricingCard = ({pricing}:any) => {
         </div>
         <div className='px-5 w-full my-3'>
         <Button onClick={async ()=>{
-            const {data} = await axios.post("http://localhost:8000/subs/session",{
+            const {data} = await instance.post("http://localhost:8000/subs/session",{
                 priceId:pricing.id
             },
             {

@@ -6,7 +6,6 @@ const opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.JWT_SECRET
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    console.log(opts.jwtFromRequest)
     User.findById(jwt_payload.id, function(err, user) {
         if (err) {
             return done(err, false);
@@ -16,7 +15,6 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
             return done(null, user);
         } else {
             return done(null, false);
-            // or you could create a new account
         }
     });
 }));

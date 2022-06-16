@@ -1,10 +1,10 @@
-import axios from 'axios'
 import React from 'react'
 import MainLayout from '../components/MainLayout'
 import Pricing from '../components/Pricing'
 import { useAppSelector } from '../redux/hooks'
+import instance from '../utils/axios'
 
-const Membership = ({prices}:any) => {
+const Membership = ({prices=null}:any) => {
   const {user} = useAppSelector(state=>state);
   return (
     <MainLayout>
@@ -17,7 +17,7 @@ export default Membership
 
 
 export async function getStaticProps() {
-  const plans = await axios.get("https://ave-dating-site.herokuapp.com/subs/prices")
+  const plans = await instance.get("/subs/prices");
 const activePlans = plans.data.data.filter((plan:any)=>plan.active===true)
   return {
     props: {prices:activePlans}, 

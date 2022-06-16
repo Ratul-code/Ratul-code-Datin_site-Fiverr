@@ -32,9 +32,11 @@ const Navbar = () => {
         <ul className={navbar.linksContainer}>
 
         <li className={`${router.pathname==="/" && navbar.active}`}><Link href="/">Home</Link></li>
-          <li className={`${router.pathname.startsWith("/mydirectory") && navbar.active}`}><Link href="#">My Directory</Link></li>
-          <li className={`${router.pathname.startsWith("/chat") && navbar.active}`}><Link href="#">Chat</Link></li>
-          <li className={`${router.pathname.startsWith("/membership") && navbar.active}`}><Link href="#">Membership</Link></li>
+
+          <li className={`${router.pathname.startsWith("/successtories") && navbar.active}`}><Link href="#">Succes Stories</Link></li>
+
+          <li className={`${router.pathname.startsWith("/membership") && navbar.active}`}><Link href="/membership">Membership</Link></li>
+
         </ul>
 
         <div className={navbar.buttonContainer}>
@@ -65,10 +67,11 @@ const Navbar = () => {
             }`}
           >
 
-          <li className={`${router.pathname==="/" && navbar.active}`}><Link href="#">Home</Link></li>
-          <li className={`${router.pathname.startsWith("/mydirectory") && navbar.active}`}><Link href="#">My Directory</Link></li>
-          <li className={`${router.pathname.startsWith("/chat") && navbar.active}`}><Link href="#">Chat</Link></li>
-          <li className={`${router.pathname.startsWith("/membership") && navbar.active}`}><Link href="#">Membership</Link></li>
+            <li className={`${router.pathname==="/" && navbar.active}`}><Link href="/">Home</Link></li>
+
+            <li className={`${router.pathname.startsWith("/successtories") && navbar.active}`}><Link href="#">Succes Stories</Link></li>
+
+            <li className={`${router.pathname.startsWith("/membership") && navbar.active}`}><Link href="/membership">Membership</Link></li>
 
             <Button onClick={()=>router.push("/login")} hoverText="#000" color="#000" fullWidth btnType="outline">
               SIGN IN

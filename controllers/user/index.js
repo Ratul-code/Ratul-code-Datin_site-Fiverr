@@ -1,7 +1,6 @@
 const { stripe } = require("../../utils/stripe")
 
 exports.getUser = (req,res,next)=>{
-    console.log(req.headers)
     res.json({user:req.user})
 }
 exports.getPlan = async (req,res,next)=>{

@@ -10,7 +10,6 @@ exports.getPrices = async (req,res,next)=>{
 
 
 exports.createSession = async (req,res,next)=>{
-    console.log(req.user.stripeCustomerId);
     const session = await stripe.checkout.sessions.create(
         {
             mode:"subscription",

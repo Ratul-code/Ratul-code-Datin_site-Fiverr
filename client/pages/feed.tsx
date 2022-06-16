@@ -5,6 +5,7 @@ import FeedBody from '../components/FeedBody'
 import FilterPaper from '../components/FilterPaper'
 import MainLayout from '../components/MainLayout'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
+import instance from '../utils/axios'
 const Feed = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -12,7 +13,7 @@ const Feed = () => {
   useEffect(()=>{
     const fetchUser = async()=>{
       console.log(user.token)
-      const data = await axios.get("https://ave-dating-site.herokuapp.com/users/getPlan",{
+      const data = await instance.get("/users/getPlan",{
         headers:{
           Authorization:`${user.token}`
         },

@@ -8,6 +8,7 @@ import loginPage from "../styles/Login.module.css";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { getAccessToken } from "../redux/slices/userSlice";
+import instance from "../utils/axios";
 interface loginProps {
   email: string;
   password: string;
@@ -44,7 +45,7 @@ const Register = () => {
     },
     onSubmit: async (values,{resetForm}) => {
       try {
-        const {data} =  await axios.post("https://ave-dating-site.herokuapp.com/auth/register",{
+        const {data} =  await instance.post("/auth/register",{
           ...values
         });
         dispatch(getAccessToken(data.token))

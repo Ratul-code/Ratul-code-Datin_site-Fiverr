@@ -79,7 +79,7 @@ const PricingCard = ({pricing}:any) => {
                 if(error.response.data.error){
                     dispatch(setMessage(error.response.data.error));
                     dispatch(setIsOpen(true))
-                } else{
+                } if(error.response.statusText==="Unauthorized"){
                     dispatch(setMessage(error.response.statusText + "! You have to signup or signin"));
                     dispatch(setIsOpen(true))
                 }

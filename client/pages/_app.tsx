@@ -5,6 +5,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import store from "../redux/store";
 import { Provider } from "react-redux";
 import { persistStore } from "redux-persist";
+import { useEffect } from "react";
 
 const persistor = persistStore(store);
 

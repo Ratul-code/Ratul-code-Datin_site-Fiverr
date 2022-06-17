@@ -14,7 +14,6 @@ const Feed = () => {
   useEffect(()=>{
     dispatch(fetchUserPlan(user.token));
   },[])
-  console.log(user.plan);
   if(!user.token){
     router.replace("/login");
     return 

@@ -31,7 +31,7 @@ const FeedBody = () => {
                     }}className='hover:bg-gray-300 cursor-pointer px-4'>Last Active</li>
             </ul>
         </div>
-        <div className='mt-4 grid  grid-cols-1 place-items-center sm:grid-cols-2 lg:grid-cols-3 gap-5 flex-wrap'>
+        <div className='mt-4 grid  grid-cols-1 place-items-center sm:grid-cols-2 lg:grid-cols-3 gap-5 flex-wrap mb-4'>
                     <ProfileCard src="/assets/democard1.jpg" username='Mileng' age={20} address="Cagayan de Oro, Misamis Oriental," seeking=' Male 22 - 54' active='4 hours ago'/>
                     <ProfileCard username='Mileng' age={20} address="Cagayan de Oro, Misamis Oriental," seeking=' Male 22 - 54' active='4 hours ago'/>
                     <ProfileCard src="/assets/democard5.jpg" username='Mileng' age={20} address="Cagayan de Oro, Misamis Oriental," seeking=' Male 22 - 54' active='4 hours ago'/>
@@ -40,7 +40,7 @@ const FeedBody = () => {
                     <ProfileCard src="/assets/democard3.jpg" username='Mileng' age={20} address="Cagayan de Oro, Misamis Oriental," seeking=' Male 22 - 54' active='4 hours ago'/>
                     <ProfileCard src="/assets/democard6.jpg" username='Mileng' age={20} address="Cagayan de Oro, Misamis Oriental," seeking=' Male 22 - 54' active='4 hours ago'/>
         </div>
-        <div className='flex justify-between items-center px-4 text-lg text-gray-500 cursor-pointer font-semibold'>
+        <div className='flex justify-between items-center px-4 py-4 text-lg text-gray-500 cursor-pointer font-semibold'>
             <div className='flex items-center gap-2 hover:scale-105'>
                 <GrFormPrevious size={20}/>
                 <p>Previous</p>

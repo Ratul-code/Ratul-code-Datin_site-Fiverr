@@ -11,15 +11,23 @@ const initialState:userSliceStateType = {
 
 
 export const fetchUserPlan = createAsyncThunk("measure",async (token:string)=>{
-    const {data} = await instance.get("/user/getPlan",{
-        headers:{
-            Authorization:token
+    try {
+        const {data} = await instance.get("/user/getPlan",{
+            headers:{
+                Authorization:token
+            }
+        });
+        console.log(data);
+        if(data){
+            return {isAuthenticated:true,plan:data.plan}
         }
-    });
-    if(data){
-        return data.plan
+        return {isAuthenticated:true,plan:data}
+    } catch (error:any) {
+        if(error.response.statusText){
+            return {isAuthenticated:false,plan:""}
+        }
     }
-    return data
+
 });
 
 const userSlice = createSlice({
@@ -36,7 +44,11 @@ const userSlice = createSlice({
     extraReducers:(builder:ActionReducerMapBuilder<userSliceStateType>)=>{
         builder
         .addCase(fetchUserPlan.fulfilled ,(state,action)=>{
-            state.plan = action.payload
+            if(action.payload?.isAuthenticated){
+                state.plan = action.payload.plan
+            }else{
+                state.token = ""
+            }
         })
     }
 })

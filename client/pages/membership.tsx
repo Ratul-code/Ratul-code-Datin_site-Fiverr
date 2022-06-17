@@ -17,9 +17,8 @@ export default Membership
 
 
 export async function getStaticProps() {
-  const plans = await instance.get("/subs/prices");
-const activePlans = plans.data.data.filter((plan:any)=>plan.active===true)
+  const {data} = await instance.get("/subs/prices");
   return {
-    props: {prices:activePlans}, 
+    props: {prices:data}, 
   }
 }

@@ -16,7 +16,10 @@ export const fetchUserPlan = createAsyncThunk("measure",async (token:string)=>{
             Authorization:token
         }
     });
-    return data.plan
+    if(data){
+        return data.plan
+    }
+    return data
 });
 
 const userSlice = createSlice({

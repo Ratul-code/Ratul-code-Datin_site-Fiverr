@@ -1,12 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import Button from "../Button";
 import {useRouter} from "next/router";
 import instance from '../../utils/axios';
+import { setIsOpen, setMessage } from '../../redux/slices/modalSlice';
+import Modal from '../Modal';
+import PricingModal from './PricingModal';
 const PricingCard = ({pricing}:any) => {
     const router = useRouter();
     const {user} = useAppSelector(state=>state);
+    const dispatch = useAppDispatch();
     const [benefits,setBenefits] = useState<string[]>();
     useEffect(()=>{
         let benefits:string[]=[];
@@ -41,10 +45,13 @@ const PricingCard = ({pricing}:any) => {
     },[])
   return (
     <div className={`${pricing.nickname==="Silver" && "translate-y-0 md:translate-y-[-30px]"} flex flex-col mt-5 gap-5  max-w-[390px] items-center p-4 border-[1px] border-solid border-gray-300 shadow-lg rounded-xl`}>
+        <Modal>
+            <PricingModal />
+        </Modal>
         <div className='mt-4'>
             <h1 className={`tracking-wider text-center text-[40px] font-sans font-bold `}>{pricing.nickname}</h1>
             <p className=' mt-4 text-lg text-secondary font-sans text-center '>Become a member and enjoy the benefits</p>
-            <p className='text-[40px] mt-4 font-[500] text-black text-center'>${pricing.unit_amount/100}/<span className='text-gray-600 text-3xl font-[200]'>mo</span> </p>
+            <p className='text-[40px] mt-4 font-[500] text-black text-center'>${pricing.amount/100}/<span className='text-gray-600 text-3xl font-[200]'>mo</span> </p>
             <div className='w-[95%] mt-3 mx-auto h-[1px] bg-gray-300' ></div>
         </div>
         <div>
@@ -57,17 +64,26 @@ const PricingCard = ({pricing}:any) => {
         </div>
         <div className='px-5 w-full my-3'>
         <Button onClick={async ()=>{
-            const {data} = await instance.post("/subs/session",{
-                priceId:pricing.id
-            },
-            {
-                headers:{
-                    "Authorization":`${user.token}`
+            try {
+                const {data} = await instance.post("/subs/session",{
+                    priceId:pricing.id
+                },
+                {
+                    headers:{
+                        "Authorization":`${user.token}`
+                    }
+                }
+                )
+                window.location.replace(data.url);
+            } catch (error:any) {
+                if(error.response.data.error){
+                    dispatch(setMessage(error.response.data.error));
+                    dispatch(setIsOpen(true))
+                } else{
+                    dispatch(setMessage(error.response.statusText + "! You have to signup or signin"));
+                    dispatch(setIsOpen(true))
                 }
             }
-            )
-            
-            window.location.replace(data.url)
         }} fullWidth bg='#1769aa' btnType='outline' >BUY PLAN</Button>
         </div>
     </div>

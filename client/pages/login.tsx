@@ -40,7 +40,9 @@ const Login = () => {
         setTimeout(()=>{
           setErrorMsg("")
         },5000)
-        setErrorMsg(error.response.data?.error)
+        if(error.response.data){
+          setErrorMsg(error.response.data.error)
+        }
       }
       resetForm();
     },

@@ -14,11 +14,11 @@ const Profile = () => {
     useEffect(()=>{
       dispatch(fetchUserPlan(user.token));
     })
-    console.log(user.token);
+    console.log(user.plan);
   return (
     <div>
         Accessable for bronze members userID:{id}
-        <h1>{user.plan}</h1>
+        {/* <h1>{user.plan}</h1> */}
     </div>
   )
 }

@@ -20,7 +20,7 @@ const Feed = () => {
   }
   return (
     <MainLayout>
-      <FilterPaper/>
+      {/* <FilterPaper/> */}
       <FeedBody/>
     </MainLayout>
   )

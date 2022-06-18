@@ -1,5 +1,6 @@
 const { stripe } = require("../../utils/stripe")
-
+const User = require("../../models/user");
+const Profile = require("../../models/profile");
 exports.getUser = (req,res,next)=>{
     res.json({user:req.user})
 }
@@ -31,4 +32,10 @@ exports.getPlan = async (req,res,next)=>{
     }else{
         res.json();
     }
+}
+
+
+exports.createProfile = async (req,res,next)=>{
+    const profile = await Profile.find().populate("profileUser");
+    res.json({profile})
 }

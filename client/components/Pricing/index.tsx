@@ -18,4 +18,3 @@ const Pricing = ({prices}:any) => {
 }
 
 export default Pricing
-

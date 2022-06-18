@@ -7,8 +7,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#ADD8E6",
-        secondary:"#1769aa",
+        primary: "#a98046",
+        // primary: "#ADD8E6",
+        secondary:"#684007",
+        // secondary:"#1769aa",
         main: "#FBFBFC",
         female:"#e72a53e3",
         tcolor: "rgb(128, 129, 145)",

@@ -23,6 +23,7 @@
 }
 .active{
     color: #ADD8E6;
+    /* color: #69420b; */
 }
 .active::before{
     content: "";

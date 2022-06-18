@@ -4,8 +4,6 @@ const ErrorResponse = require("../utils/errorResponse");
 const { stripe } = require("../utils/stripe");
 
 
-
-
 exports.register = async (req, res, next) => {
     const {firstname, lastname, username, gender,age, email, password } = req.body;
     const duplicateEmail = await User.findOne({email})

@@ -18,7 +18,7 @@ const ProfileAvatar = () => {
     <>
     <Tooltip title="Open settings">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar sx={{width:"40px",height:"40px"}} alt="Remy Sharp" src="" />
+            <Avatar sx={{width:"40px",height:"40px"}}  alt="" src="/assets/democard1.jpg" />
           </IconButton>
         </Tooltip>
         <Menu
@@ -40,7 +40,10 @@ const ProfileAvatar = () => {
             <MenuItem  onClick={handleCloseUserMenu}>
               <Typography textAlign="center">{"Dashboard"}</Typography>
             </MenuItem>
-            <MenuItem  onClick={handleCloseUserMenu}>
+            <MenuItem  onClick={()=>{
+              setAnchorElUser(null)
+              router.replace("/user/3")
+            }}>
               <Typography textAlign="center">{"Profile"}</Typography>
             </MenuItem>
             <MenuItem  onClick={handleCloseUserMenu}>

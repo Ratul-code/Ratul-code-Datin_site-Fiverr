@@ -1,26 +1,26 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react'
+import Profile from '../../components/Profile';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { fetchUserPlan } from '../../redux/slices/userSlice';
 
-const Profile = () => {
+const User = () => {
     const router = useRouter();
     const {user} = useAppSelector(state=>state);
     const {id} = router.query;
     const dispatch = useAppDispatch();
-    // if(!user.token){
-    //     router.replace("/login");
-    // }
     useEffect(()=>{
       dispatch(fetchUserPlan(user.token));
-    })
-    console.log(user.plan);
+    },[])
+    if(!user.token){
+      router.replace("/login");
+      return <></>
+    }
   return (
-    <div>
-        Accessable for bronze members userID:{id}
-        {/* <h1>{user.plan}</h1> */}
-    </div>
+    <>
+        <Profile/>
+    </>
   )
 }
 
-export default Profile
+export default User

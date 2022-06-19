@@ -2,7 +2,7 @@ import { ActionReducerMapBuilder,createSlice, PayloadAction,createAsyncThunk } f
 import instance from "../../utils/axios";
 interface userSliceStateType{
     token:string,
-    plan:string,
+    plan:any,
 }
 const initialState:userSliceStateType = {
     token:"",

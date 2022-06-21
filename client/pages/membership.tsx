@@ -5,7 +5,6 @@ import { useAppSelector } from '../redux/hooks'
 import instance from '../utils/axios'
 
 const Membership = ({prices=null}:any) => {
-  const {user} = useAppSelector(state=>state);
   return (
     <MainLayout>
         {prices && <Pricing prices={prices}/>}

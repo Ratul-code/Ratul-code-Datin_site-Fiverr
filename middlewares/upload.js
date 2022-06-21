@@ -6,7 +6,8 @@ const storage = multer.diskStorage({
       cb(null, 'uploads')
     },
     filename: function (req, file, cb) {
-      cb(null, file.originalname + '-' + req.user.id)
+      console.log(req.user.id)
+      cb(null, req.user.id +'-'+file.originalname)
     }
   })
 

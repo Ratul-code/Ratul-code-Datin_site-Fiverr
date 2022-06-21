@@ -35,7 +35,7 @@ const FeedBody = ({profiles}:feedProps) => {
                     }}className='hover:bg-gray-300 cursor-pointer px-4'>Last Active</li>
             </ul>
         </div>
-        <div className='mt-4 grid  grid-cols-2 place-items-center sm:grid-cols-3 lg:grid-cols-4 gap-5 flex-wrap mb-4'>
+        <div className='mt-4 grid  grid-cols-1 place-items-center sm:grid-cols-2 lg:grid-cols-3 gap-5 flex-wrap mb-4'>
             {profiles?.map((profile:any,index)=>{
 
                 return(

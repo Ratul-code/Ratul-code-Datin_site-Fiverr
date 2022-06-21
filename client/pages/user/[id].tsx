@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Profile from '../../components/Profile';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { fetchProfile } from '../../redux/slices/profileSlice';
@@ -8,13 +8,14 @@ import { fetchUserPlan } from '../../redux/slices/userSlice';
 const User = () => {
     const router = useRouter();
     const {user,profile} = useAppSelector(state=>state);
-    const {id} = router.query;
     const dispatch = useAppDispatch();
+    const {id} = router.query;
+    const [renderCount,setRenderCount] = useState(0);
+  console.log({id,path:router.pathname})
     useEffect(()=>{
-      if(profile.profileStatus==="IDLE"){
         dispatch(fetchUserPlan(user.token));
+
         dispatch(fetchProfile({token:user.token,userId:id}))
-      }
     },[id]);
     if(!user.token){
       router.replace("/login");
@@ -22,11 +23,9 @@ const User = () => {
     }
   return (
     <>
-        {profile.profileStatus==="LOADING"?<h1>Loading</h1> :
 
-        <Profile/>
+        {profile.profileStatus!=="LOADING"?<Profile/>: <div className='w-screen py-10'><h1 className='text-3xl text-center text-black font-bold'>Loading...</h1></div>  }
 
-        }
     </>
   )
 }

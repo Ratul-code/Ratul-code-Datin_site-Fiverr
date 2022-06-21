@@ -20,6 +20,7 @@ connectDB();
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use('/images', express.static('uploads'))
 
 
 
@@ -31,16 +32,14 @@ require("./config/passport")(passport)
 
 
 
-
-
 app.get("/",(req,res)=>{
 	res.send("<h1>Hi there Hello</h1>")
 });
+app.get("/:filename",(req,res,next)=>{
+    res.json(req.params);
+})
 // Routes
 app.use("/auth", require("./routes/auth"));
-
-// Authenticated Routes
-app.use(passport.authenticate("jwt",{session:false}))
 app.use("/user", require("./routes/user"));
 app.use("/subs", require("./routes/subs"));
 

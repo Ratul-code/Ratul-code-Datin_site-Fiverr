@@ -7,6 +7,7 @@ const { stripe } = require("../utils/stripe");
 exports.register = async (req, res, next) => {
     const {firstname, lastname, username, gender,age, email, password } = req.body;
     const duplicateEmail = await User.findOne({email})
+    console.log(duplicateEmail);
     if(duplicateEmail){
       return next(new ErrorResponse("An account with this email already exist", 500));
     }
@@ -30,7 +31,7 @@ exports.register = async (req, res, next) => {
       });
       sendToken(user, 201, res);
     } catch (error) {
-      console.log(error,"jk")
+      console.log(error);
       next(error);
     }
   };

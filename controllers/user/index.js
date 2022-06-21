@@ -53,7 +53,10 @@ exports.createProfile = async (req, res, next) => {
         username:req.user.username,
         gender:req.user.gender,
         age:req.user.age,
-        profileImage: fs.readFileSync(`uploads/${req.file.filename}`),
+        profileImage: {
+          name:req.file.filename,
+          data:fs.readFileSync(`uploads/${req.file.filename}`),
+        },
         bio,
         about: {
           country,
@@ -90,6 +93,9 @@ exports.getProfiles = async (req, res, next) => {
 };
 exports.getProfileById = async (req, res, next) => {
   const userId = req.params.id;
+  console.log("myid",req.user.id);
+  console.log({userId});
+  console.log(userId === req.user.id);
   let myProfile = false;
   if (userId === req.user.id) {
     myProfile = true;

@@ -29,12 +29,15 @@ age:{
     max:100
 },
   profileImage: {
-    type: Buffer,
-    required: [true, "Please provide a profile image"],
+    name:{type:String,required:[true,"Image name must be provided"]},
+    data:{
+      type: Buffer,
+      required: [true, "Please provide a profile image"],
+    }
   },
   bio: {
     type: String,
-    maxlength: [40, "Your bio cannot exceed 40 characters"],
+    maxlength: [120, "Your bio cannot exceed 120 characters"],
     required: [true, "Please provide a bio"],
     trim:true
   },

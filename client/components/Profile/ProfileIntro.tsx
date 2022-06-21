@@ -6,7 +6,7 @@ import {IconButton} from "@mui/material";
 import { useAppSelector } from '../../redux/hooks';
 import { useOutsideClick } from '../../hooks/OutsideClickhandler';
 const ProfileIntro = () => {
-  const {user} = useAppSelector(state=>state);
+  const {user,profile:{profile}} = useAppSelector(state=>state);
   const [infoOpen,setInfoOpen] = useState(false);
   const infoRef = useOutsideClick(()=>{
     setInfoOpen(false);
@@ -50,8 +50,8 @@ const ProfileIntro = () => {
                 
               <div>
                 <div className="flex gap-4 flex-col ">
-                  <h1 className="text-[30px] max-w-[359px] font-sans font-bold tracking-wider">
-                    Mileng Khwaza
+                  <h1 className="text-[30px] max-w-[359px] font-sans font-bold tracking-wider capitalize">
+                    {profile?.firstname} {profile?.lastname}
                   </h1>
                   <div className="flex gap-1">
                     <FaMedal size={23} color="#684007 " />
@@ -61,7 +61,7 @@ const ProfileIntro = () => {
                 </div>
                 <div className=" mt-4">
                   <p className="text-md max-w-[650px] text-gray-600 font-semibold font-sans  leading-[20px]">
-                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim dicta reiciendis quam eaque quis sit aliquam provident voluptate, tenetur earum rerum! Beatae, ullam. Ad tempora quidem voluptates assumenda illo tenetur labore nesciunt consequuntur. Delectus ut ipsam iste, accusantium molestiae maiores.
+                  {profile?.bio}
                   </p>
                 </div>
               </div>
@@ -71,31 +71,18 @@ const ProfileIntro = () => {
                   <li className='text-xl cursor-pointer text-[#853227] underline font-bold'>About Me</li>
                 </ul>
               <div className="flex flex-wrap mt-[-10px] ml-[-12px] justify-start w-full gap-3 max-w-[400px] text-black  ">
-                <h3 className="text-sm mx-3 font-semibold">
-                    Country: <span className=" text-gray-600 ">Korea</span>
+                {profile?.about && Object.keys(profile.about).map((info,index)=>(
+                <h3 key={index} className="text-sm mx-3 font-semibold capitalize">
+                    {info}: <span className=" text-gray-600 ">{profile?.about[info]}</span>
                 </h3>
-                <h3 className="text-sm mx-3 font-semibold">
-                    State: <span className=" text-gray-600 ">Kriogaing</span>
-                </h3>
-                <h3 className="text-sm font-semibold">
-                    City: <span className=" text-gray-600 ">Wangchi</span>
-                </h3>
-                <h3 className="text-sm mx-3 font-semibold">
-                    Hobby: <span className=" text-gray-600 ">Gardening</span>
-                </h3>
-                <h3 className="text-sm mx-3 font-semibold">
-                    Ethnicity: <span className=" text-gray-600 ">Asian White</span>
-                </h3>
-                <h3 className="text-sm mx-3 font-semibold">
-                    Celebrity Crush: <span className=" text-gray-600 ">Donald Trump</span>
-                </h3>
+                )) }
               </div>
               </div>
               <div className="flex flex-col gap-8">
                 <div className="ml-[-20px] flex-wrap gap-8 flex justify-start px-0 sm:px-4 w-full max-w-[700px]">
                   <button className=" hover:scale-105 transition-all duration-200 ease-in-out ml-[-4px] flex gap-4 items-center  max-w-[150px] py-1 px-6  shadow-xl rounded-full">
                     <FaHeart className="text-3xl cursor-pointer text-female hover:scale-105" />
-                    <p className="text-md font-sans font-semibold">287</p>
+                    <p className="text-md font-sans font-semibold">{profile?.likes?.length}</p>
                   </button>
                   <button className=" hover:scale-105 transition-all duration-200 ease-in-out ml-[-4px] flex gap-4 items-center  py-1 px-6  shadow-xl rounded-full">
                     <BsChatSquareFill className="text-3xl cursor-pointer text-blue-500 hover:scale-105" />

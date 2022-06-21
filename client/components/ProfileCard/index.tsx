@@ -14,7 +14,7 @@ interface ProfileCardProps{
     profile:any
 }
 const ProfileCard = ({profile}:ProfileCardProps) => {
-    const {profileImage,username,age,bio,interests:{seeking,minAge,maxAge}} = profile
+    const {username,gender,age,bio,interests:{seeking,minAge,maxAge}} = profile
     const router = useRouter();
     const {user} = useAppSelector(state=>state);
     const dispatch = useAppDispatch()
@@ -31,15 +31,15 @@ const ProfileCard = ({profile}:ProfileCardProps) => {
     // const str = profileImage.data.toString("base64")
     // console.log(str)
   return (
-    <div  className='relative transition-all ease-in-out duration-200 w-full max-w-[600px] sm:w-full h-auto border-[2px] border-solid border-[#684007] rounded-2xl overflow-hidden shadow-2xl shadow-[#0000006b] flex flex-col justify-start pb-6 gap-4 '>
+    <div  className='relative transition-all ease-in-out duration-200 w-full max-w-[600px] sm:w-full h-auto border-[0px] border-solid border-[#684007] rounded-2xl overflow-hidden shadow-2xl shadow-[#0000006b] flex flex-col justify-start pb-6 gap-4 '>
         <div  className={`${procard.procard_image} relative flex justify-center w-full h-[280px] items-center bg-[#00000036]`}>
 
-            <Image src={"/assets/blankcard.png"} layout={"fill"} objectPosition="top" objectFit={"cover"} />
+            <img src={profile?.profileImage?.name?`https://ave-dating-site.herokuapp.com/images/${profile.profileImage.name}`:undefined || "/assets/blankcard.png"} alt="sss" className='w-full h-full object-cover object-top' />
              
         </div>
         <div className='px-4'>
         <div className='flex gap-1 items-center'>
-            <h1 onClick={()=>{router.push("/user/2")}} className='text-xl cursor-pointer font-sans hover:underline font-bold tracking-wider text-[#684007]'>{username}</h1>
+            <h1 onClick={()=>{router.push("/user/2")}} className='text-xl capitalize cursor-pointer font-sans hover:underline font-bold tracking-wider text-[#684007]'>{username}</h1>
             <FaFemale size={26} color='#684007'/>
         </div>
         <div className=''>

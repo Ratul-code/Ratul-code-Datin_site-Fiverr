@@ -2,6 +2,7 @@ require("dotenv").config({ path: "./.env" });
 const express			=require('express');
 const cors              =require('cors')
 const passport			=require('passport');
+const multer			=require('multer');
 const connectDB         =require("./config/db");
 const PORT              =process.env.PORT || 8000;
 const app               =express();
@@ -30,6 +31,9 @@ require("./config/passport")(passport)
 
 // Routes
 app.use("/auth", require("./routes/auth"));
+
+// Authenticated Routes
+app.use(passport.authenticate("jwt",{session:false}))
 app.use("/user", require("./routes/user"));
 app.use("/subs", require("./routes/subs"));
 

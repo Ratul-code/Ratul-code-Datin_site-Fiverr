@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {userReducer,modalReducer} from "./slices";
+import {userReducer,modalReducer,profileReducer} from "./slices";
 import {
     persistStore,
     persistReducer,
@@ -22,7 +22,8 @@ import {
 const store = configureStore({
     reducer: {
         user:persistedUserReducer,
-        modal:modalReducer
+        modal:modalReducer,
+        profile:profileReducer
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({

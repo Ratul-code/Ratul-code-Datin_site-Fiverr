@@ -2,6 +2,11 @@ import styled,{css} from "styled-components";
 import { btnPropType } from ".";
 
 export const ButtonStyled = styled.button<btnPropType>`
+    display: flex ;
+    gap: 1px ;
+    justify-content:center ;
+    align-items: center;
+
     border:1px solid ${(props:btnPropType)=>(props.bg)};
     /* border:1px solid #cda777; */
 
@@ -10,7 +15,7 @@ export const ButtonStyled = styled.button<btnPropType>`
 
     padding:${(props:btnPropType)=>props.size==="sm"?"0.3rem 0.7rem":props.size==="lg"?"0.2rem 4.2rem ":"0.6rem 1.5rem"};
 
-    font-size:${(props:btnPropType)=>props.fontSize==="sm"?"14px":props.size==="lg"?"1.5rem":"1rem"};
+    font-size:${(props:btnPropType)=>props.fontSize==="sm"?"14px":props.size==="lg"?"1rem":"1rem"};
 
     color:${(props:btnPropType)=>props.btnType==="outline"?props.bg:props.color};
 

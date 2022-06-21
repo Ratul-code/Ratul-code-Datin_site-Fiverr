@@ -1,11 +1,16 @@
+
 import React, { useState } from 'react'
 import {AiOutlineCaretDown} from "react-icons/ai";
 import {GrFormPrevious,GrFormNext} from "react-icons/gr";
 import { useOutsideClick } from '../../hooks/OutsideClickhandler';
+import { useAppSelector } from '../../redux/hooks';
 import Modal from '../Modal';
 import ProfileCard from '../ProfileCard';
 import FeedModal from './FeedModal';
-const FeedBody = () => {
+interface feedProps{
+    profiles:any[]
+}
+const FeedBody = ({profiles}:feedProps) => {
     const [isOrderBy,setIsOrderBy] = useState(false);
     const [orderBy,setOrderBy] = useState<string>("Relevance")
     const orderByRef = useOutsideClick(()=>{
@@ -31,11 +36,11 @@ const FeedBody = () => {
             </ul>
         </div>
         <div className='mt-4 grid  grid-cols-2 place-items-center sm:grid-cols-3 lg:grid-cols-4 gap-5 flex-wrap mb-4'>
-                    <ProfileCard src="/assets/democard1.jpg" username='Mileng' age={20} address="Badda Gulshan Rampura, Dhaka, Bangladesh" seeking=' Male 22 - 54' active='4 hours ago'/>
-                    <ProfileCard username='Mileng' age={20} address="Cagayan de Oro, Misamis Oriental," seeking=' Male 22 - 54' active='4 hours ago'/>
-                    <ProfileCard src="/assets/democard5.jpg" username='Senora' age={20} address="Badda Gulshan Rampura, Dhaka, Bangladesh" seeking=' Male 22 - 54' active='4 hours ago'/>
-                    <ProfileCard src="/assets/democard2.jpg" username='Mileng' age={20} address="Badda Gulshan Rampura, Dhaka, Bangladesh" seeking=' Male 22 - 54' active='4 hours ago'/>
-                    <ProfileCard src="/assets/democard4.jpg" username='Gadot' age={20} address="Badda Gulshan Rampura, Dhaka, Bangladesh" seeking=' Male 22 - 54' active='4 hours ago'/>
+            {profiles?.map((profile:any,index)=>{
+
+                return(
+                <ProfileCard profile={profile} key={profile.profileUser}/>
+            )})}
         </div>
         <div className='flex justify-between items-center px-4 py-4 text-lg text-gray-500 cursor-pointer font-semibold'>
             <div className='flex items-center gap-2 hover:scale-105'>

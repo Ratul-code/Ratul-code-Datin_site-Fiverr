@@ -7,7 +7,7 @@ import router from "next/router";
 import loginPage from "../styles/Login.module.css";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { getAccessToken } from "../redux/slices/userSlice";
+import { getAccessToken, setUser } from "../redux/slices/userSlice";
 import instance from "../utils/axios";
 interface loginProps {
   email: string;
@@ -48,7 +48,8 @@ const Register = () => {
         const {data} =  await instance.post("/auth/register",{
           ...values
         });
-        dispatch(getAccessToken(data.token))
+        dispatch(getAccessToken(data.token));
+        dispatch(setUser(data.user))
       } catch (error:any) {
         console.log(error)
         setTimeout(()=>{

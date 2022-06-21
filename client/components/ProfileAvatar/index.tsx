@@ -1,10 +1,11 @@
 import React from 'react'
 import { Avatar, IconButton, Menu,MenuItem, Tooltip, Typography } from '@mui/material';
-import { useAppDispatch } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logout } from '../../redux/slices/userSlice';
 import { useRouter } from 'next/router';
 const ProfileAvatar = () => {
   const router = useRouter();
+  const {user} = useAppSelector(state=>state);
   const dispatch = useAppDispatch()
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -41,8 +42,8 @@ const ProfileAvatar = () => {
               <Typography textAlign="center">{"Dashboard"}</Typography>
             </MenuItem>
             <MenuItem  onClick={()=>{
-              setAnchorElUser(null)
-              router.replace("/user/3")
+              setAnchorElUser(null);
+              router.replace(`/user/${user.user.id}`)
             }}>
               <Typography textAlign="center">{"Profile"}</Typography>
             </MenuItem>

@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { useRouter } from "next/router";
 import loginPage from "../styles/Login.module.css";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { getAccessToken } from "../redux/slices/userSlice";
+import { getAccessToken, setUser } from "../redux/slices/userSlice";
 import instance from "../utils/axios";
 
 
@@ -38,7 +38,9 @@ const Login = () => {
         const {data} =  await instance.post("/auth/login",{
           ...values
         });
+        console.log(data)
         dispatch(getAccessToken(data.token))
+        dispatch(setUser(data.user))
       } catch (error:any) {
         setTimeout(()=>{
           setErrorMsg("")

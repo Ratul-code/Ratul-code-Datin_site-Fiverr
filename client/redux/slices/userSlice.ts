@@ -3,10 +3,11 @@ import instance from "../../utils/axios";
 interface userSliceStateType{
     token:string,
     plan:any,
+    user?:any
 }
 const initialState:userSliceStateType = {
     token:"",
-    plan:""
+    plan:"",
 }
 
 
@@ -17,7 +18,6 @@ export const fetchUserPlan = createAsyncThunk("measure",async (token:string)=>{
                 Authorization:token
             }
         });
-        console.log(data);
         if(data){
             return {isAuthenticated:true,plan:data.plan}
         }
@@ -37,8 +37,12 @@ const userSlice = createSlice({
         getAccessToken(state,action:PayloadAction<string>){
             state.token = action.payload
         },
+        setUser(state,action:PayloadAction<string>){
+            state.user = action.payload
+        },
         logout(state){
             state.token = ""
+            state.user=undefined
         }
     },
     extraReducers:(builder:ActionReducerMapBuilder<userSliceStateType>)=>{
@@ -47,11 +51,12 @@ const userSlice = createSlice({
             if(action.payload?.isAuthenticated){
                 state.plan = action.payload.plan
             }else{
+                state.user=undefined
                 state.token = ""
             }
         })
     }
 })
 
-export const {getAccessToken,logout} = userSlice.actions
+export const {getAccessToken,logout,setUser} = userSlice.actions
 export default userSlice.reducer;

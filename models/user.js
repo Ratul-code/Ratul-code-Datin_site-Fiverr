@@ -27,8 +27,8 @@ const userSchema = new mongoose.Schema({
     age:{
         type:Number,
         required:[true,"Please select your gender"],
-        min:0,
-        max:60
+        min:14,
+        max:100
     },
     email:{
         type:String,

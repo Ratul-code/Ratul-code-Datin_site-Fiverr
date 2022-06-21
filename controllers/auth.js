@@ -64,13 +64,19 @@ const sendToken = (user, statusCode, res) => {
       .cookie("xs", token, {
         sameSite: "strict",
         path: "/",
-        //   maxAge: ,
         httpOnly: true,
         secure: true,
       })
       .json({
         success: true,
         token,
-        user
+        user:{
+          id:user.id,
+          firstname:user.firstname,
+          lastname:user.lastname,
+          username:user.username,
+          gender:user.gender,
+          age:user.age,
+        }
       })
     }

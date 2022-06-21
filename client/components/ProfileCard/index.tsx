@@ -11,14 +11,10 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { setIsOpen } from '../../redux/slices/modalSlice';
 
 interface ProfileCardProps{
-    src?:string,
-    username:string,
-    age:number,
-    address:string
-    seeking:string,
-    active:string,
+    profile:any
 }
-const ProfileCard = ({src="/assets/blankcard.png",username,age,address,seeking,active}:ProfileCardProps) => {
+const ProfileCard = ({profile}:ProfileCardProps) => {
+    const {profileImage,username,age,bio,interests:{seeking,minAge,maxAge}} = profile
     const router = useRouter();
     const {user} = useAppSelector(state=>state);
     const dispatch = useAppDispatch()
@@ -26,14 +22,19 @@ const ProfileCard = ({src="/assets/blankcard.png",username,age,address,seeking,a
         if(!user.plan){
             dispatch(setIsOpen(true));
         }else{
-            router.push("user/2")
+            router.push(`user/${profile.profileUser}`)
         }
     }
+    // const base64String =btoa(new Uint8Array(profileImage.data).reduce(function (data, byte) {
+    //     return data + String.fromCharCode(byte);
+    // }, ''));
+    // const str = profileImage.data.toString("base64")
+    // console.log(str)
   return (
     <div  className='relative transition-all ease-in-out duration-200 w-full max-w-[600px] sm:w-full h-auto border-[2px] border-solid border-[#684007] rounded-2xl overflow-hidden shadow-2xl shadow-[#0000006b] flex flex-col justify-start pb-6 gap-4 '>
         <div  className={`${procard.procard_image} relative flex justify-center w-full h-[280px] items-center bg-[#00000036]`}>
 
-            <Image src={src} layout={"fill"} objectPosition="top" objectFit={"cover"} />
+            <Image src={"/assets/blankcard.png"} layout={"fill"} objectPosition="top" objectFit={"cover"} />
              
         </div>
         <div className='px-4'>
@@ -42,11 +43,11 @@ const ProfileCard = ({src="/assets/blankcard.png",username,age,address,seeking,a
             <FaFemale size={26} color='#684007'/>
         </div>
         <div className=''>
-            <p className='text-[#00000093] font-semibold text-lg'>{age}<span>,{" "}</span><span>{address}</span> </p>
+            <p className='text-[#00000093] font-semibold text-lg'>{age}<span>,{" "}</span><span>{bio}</span> </p>
         </div>
         <div className='my-2 text-[18px]'>
-            <p className='text-[#000000dc] font-[500] my-1 tracking-wide'>Seeking: {seeking}</p>
-            <p className='text-[#000000ab] text-sm mt-[-4px] '>{active}</p>
+            <p className='text-[#000000dc] font-[500] my-1 tracking-wide'>Seeking: {seeking}: {minAge} - {maxAge}</p>
+            <p className='text-[#000000ab] text-sm mt-[-4px] '>{"4 hours ago"}</p>
         </div>
         </div>
         <div className='flex justify-around flex-wrap justify-self-end items-center gap-2 px-2'>

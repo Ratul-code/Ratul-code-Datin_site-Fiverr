@@ -29,6 +29,13 @@ app.use(passport.initialize());
 require("./config/passport")(passport)
 
 
+
+
+
+
+app.get("/",(req,res)=>{
+	res.send("<h1>Hi there Hello</h1>")
+});
 // Routes
 app.use("/auth", require("./routes/auth"));
 
@@ -41,9 +48,6 @@ app.use("/subs", require("./routes/subs"));
 // error handler should be in last
 app.use(require("./middlewares/errorHandler"));
 
-app.get("/",(req,res)=>{
-	res.send("<h1>Hi there Hello</h1>")
-});
 
 // listening
 app.listen(PORT,()=>{

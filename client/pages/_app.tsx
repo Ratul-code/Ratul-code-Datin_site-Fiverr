@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { PersistGate } from "redux-persist/integration/react";
-import store, { wrapper } from "../redux/store";
+import store from "../redux/store";
 import { Provider } from "react-redux";
 import { persistStore } from "redux-persist";
 

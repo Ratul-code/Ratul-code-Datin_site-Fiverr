@@ -33,7 +33,7 @@ require("./config/passport")(passport)
 
 
 app.get("/",(req,res)=>{
-	res.send("<h1>Hi there Hello</h1>")
+	res.send("<h1>dating</h1>")
 });
 app.get("/:filename",(req,res,next)=>{
     res.json(req.params);

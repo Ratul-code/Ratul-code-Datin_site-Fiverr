@@ -8,6 +8,7 @@ import { HiOutlineCheckCircle } from "react-icons/hi";
 import * as Yup from "yup";
 import Button from "../Button";
 import profile from "./Profile.module.css";
+import { country_list } from "../../utils/country";
 interface profileDataProps {
   image1?: any;
   bio: string;
@@ -24,16 +25,16 @@ const profileValidateSchema = Yup.object().shape({
     .required("Bio is required")
     .max(100, "Bio cannot exceed more than 40 characters"),
   country: Yup.string().required("Country is required"),
-  state: Yup.string().required("state is required"),
-  city: Yup.string().required("city is required"),
-  hobby: Yup.string().required("hobby is required"),
-  seeking: Yup.string().required("seeking is required"),
+  state: Yup.string().required("State is required"),
+  city: Yup.string().required("City is required"),
+  hobby: Yup.string().trim(),
+  seeking: Yup.string().required("Seeking is required"),
   minAge: Yup.number().required("Minimum age is required"),
   maxAge: Yup.string().required("Maximum age is required"),
 });
 const CreateProfile = () => {
   const [proImage, setProImage] = useState<any>();
-  const [step, setStep] = useState<any>(1);
+  const [step, setStep] = useState<number>(1);
   const [errorMsg, setErrorMsg] = useState<string>();
   const formik: FormikProps<profileDataProps> = useFormik<profileDataProps>({
     initialValues: {
@@ -49,6 +50,7 @@ const CreateProfile = () => {
     },
     onSubmit: async (values, { resetForm }) => {
       console.log(values);
+      resetForm();
     },
     validationSchema: profileValidateSchema,
   });
@@ -59,7 +61,7 @@ const CreateProfile = () => {
       </h1>
       <form
         onSubmit={formik.handleSubmit}
-        className=" w-screen max-w-[700px] h-auto pt-8 pb-1 flex flex-col "
+        className="w-screen max-w-[700px] pt-8 pb-1 flex flex-col "
       >
         {step === 1 ? (
           <>
@@ -138,7 +140,7 @@ const CreateProfile = () => {
                 }}
               />
               <div className="w-full">
-                <p className="pl-[0.8rem] mt-1 text-red-600">
+                <p className="pl-[1rem] font-semibold mt-1 text-red-600">
                   {formik.errors.bio}
                 </p>
               </div>
@@ -170,20 +172,24 @@ const CreateProfile = () => {
             </h1>
 
             <div className="flex flex-wrap justify-center items-center gap-7 px-4">
-              <div className="flex flex-col text-lg font-semibold">
-                <label className="text-lg capitalize " htmlFor="country">
+              <div className="flex w-[230px] flex-col text-lg font-semibold">
+              
+                 <label className="text-lg capitalize mt-[-o.8px]" htmlFor="country">
                   Country
                 </label>
-                <input
-                  type="text"
-                  name="country"
-                  id="country"
-                  value={formik.values.country}
-                  onChange={formik.handleChange("country")}
-                  onBlur={formik.handleBlur("country")}
-                  className="font-normal focus:border-[3px] py-1 px-2 border-[2px] border-solid border-black rounded-md"
-                />
-                <p className=" font-thin mt-1 h-[5px] text-red-600">
+                <select 
+                name="country"
+                id="country"
+                value={formik.values.country}
+                onChange={formik.handleChange("country")}
+                onBlur={formik.handleBlur("country")}
+                className="font-normal w-full focus:border-[3px] py-2 px-2 border-[2px] border-solid border-black rounded-md"
+                 >
+                  {country_list?.map((country:string,index)=>(
+                    <option key={index}>{country}</option>
+                  ))}
+                </select>
+                <p className="mt-1 h-[5px] text-red-600">
                   {formik.touched.country?formik.errors.country:""}
                 </p>
               </div>
@@ -201,7 +207,7 @@ const CreateProfile = () => {
                   onBlur={formik.handleBlur("state")}
                   className="font-normal focus:border-[3px] py-1 px-2 border-[2px] border-solid border-black rounded-md"
                 />
-                 <p className=" font-thin mt-1 h-[5px] text-red-600">
+                 <p className="mt-1 h-[5px] text-red-600">
                   {formik.touched.state?formik.errors.state:""}
                 </p>
               </div>
@@ -218,7 +224,7 @@ const CreateProfile = () => {
                   onBlur={formik.handleBlur("city")}
                   className="font-normal focus:border-[3px] py-1 px-2 border-[2px] border-solid border-black rounded-md"
                 />
-                 <p className=" font-thin mt-1 h-[5px] text-red-600">
+                 <p className="mt-1 h-[5px] text-red-600">
                   {formik.touched.city?formik.errors.city:""}
                 </p>
               </div>
@@ -235,7 +241,7 @@ const CreateProfile = () => {
                   onBlur={formik.handleBlur("hobby")}
                   className="font-normal focus:border-[3px] py-1 px-2 border-[2px] border-solid border-black rounded-md"
                 />
-                 <p className=" font-thin mt-1 h-[5px] text-red-600">
+                 <p className="mt-1 h-[5px] text-red-600">
                   {formik.touched.hobby?formik.errors.hobby:""}
                 </p>
               </div>
@@ -245,38 +251,43 @@ const CreateProfile = () => {
               4. Add Information About Interests.
             </h1>
             <div className="flex flex-wrap justify-center items-center gap-5 px-4">
-              <div className="flex flex-col text-lg font-semibold">
-                <label className="text-lg capitalize " htmlFor="seeking">
-                  seeking
-                </label>
-                <input
-                  type="text"
-                  name="seeking"
-                  id="seeking"
-                  value={formik.values.seeking}
-                  onChange={formik.handleChange("seeking")}
-                  onBlur={formik.handleBlur("seeking")}
-                  className="font-normal focus:border-[3px] py-1 px-2 border-[2px] border-solid border-black rounded-md"
-                />
-                 <p className=" font-thin mt-1 h-[5px] text-red-600">
-                  {formik.touched.seeking?formik.errors.seeking:""}
-                </p>
-              </div>
+            <div className="flex w-[230px] flex-col text-lg font-semibold">
+              
+              <label className="text-lg capitalize mt-[-o.8px]" htmlFor="seeking">
+               Seeking
+             </label>
+             <select 
+             name="seeking"
+             id="seeking"
+             value={formik.values.seeking}
+             onChange={formik.handleChange("seeking")}
+             onBlur={formik.handleBlur("seeking")}
+             className="font-normal w-full focus:border-[3px] py-2 px-2 border-[2px] border-solid border-black rounded-md"
+              >
+               <option>Male</option>
+               <option>Female</option>
+               <option>Any</option>
+             </select>
+             <p className="mt-1 h-[5px] text-red-600">
+               {formik.touched.seeking?formik.errors.seeking:""}
+             </p>
+           </div>
 
               <div className="flex flex-col text-lg font-semibold">
                 <label className="text-lg  capitalize" htmlFor="minAge">
                   Minimum Age
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="minAge"
                   id="minAge"
+                  min={0}
                   value={formik.values.minAge}
                   onChange={formik.handleChange("minAge")}
                   onBlur={formik.handleBlur("minAge")}
                   className="font-normal focus:border-[3px] py-1 px-2 border-[2px] border-solid border-black rounded-md"
                 />
-                 <p className=" font-thin mt-1 h-[5px] text-red-600">
+                 <p className="mt-1 h-[5px] text-red-600">
                   {formik.touched.minAge?formik.errors.minAge:""}
                 </p>
               </div>
@@ -285,15 +296,16 @@ const CreateProfile = () => {
                   Maximum Age
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="maxAge"
                   id="maxAge"
+                  min={0}
                   value={formik.values.maxAge}
                   onChange={formik.handleChange("maxAge")}
                   onBlur={formik.handleBlur("maxAge")}
                   className="font-normal focus:border-[3px] py-1 px-2 border-[2px] border-solid border-black rounded-md"
                 />
-                 <p className=" font-thin mt-1 h-[5px] text-red-600">
+                 <p className="mt-1 h-[5px] text-red-600">
                   {formik.touched.maxAge?formik.errors.maxAge:""}
                 </p>
               </div>
@@ -301,9 +313,16 @@ const CreateProfile = () => {
             <div>
 
             </div>
-            <div className="w-full flex justify-end mt-7">
+            <div className="w-full gap-3 flex justify-between mt-7">
               <Button
-                fullWidth
+                onClick={()=>setStep(state=>state-1)}
+                bg="#000"
+              >
+                {" "}
+                Back
+              </Button>
+              <Button
+                
                 type="submit"
                 bg="#000"
               >

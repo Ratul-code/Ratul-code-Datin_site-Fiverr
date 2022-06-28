@@ -88,7 +88,7 @@ exports.getProfiles = async (req, res, next) => {
         const profiles = await Profile.find();
         return res.json(profiles);
     } catch (error) {
-        
+        next(error);
     }
 };
 exports.getProfileById = async (req, res, next) => {

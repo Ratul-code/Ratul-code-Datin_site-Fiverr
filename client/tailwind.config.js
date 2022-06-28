@@ -16,6 +16,9 @@ module.exports = {
         tcolor: "rgb(128, 129, 145)",
       },
     },
+    fontFamily:{
+      "cursive":`'Shadows Into Light', cursive`
+    }
   },
   plugins: [],
 }

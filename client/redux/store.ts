@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {userReducer,modalReducer,profileReducer} from "./slices";
+import {createWrapper} from "next-redux-wrapper";
 import {
     persistStore,
     persistReducer,
@@ -19,7 +20,7 @@ import {
   }
   const persistedUserReducer = persistReducer(persistConfig, userReducer)
 
-const store = configureStore({
+const store=configureStore({
     reducer: {
         user:persistedUserReducer,
         modal:modalReducer,
@@ -35,4 +36,5 @@ const store = configureStore({
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
+// export const wrapper = createWrapper(store);
 export default store

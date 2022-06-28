@@ -23,9 +23,9 @@ const Modal = ({children}:modalProps) => {
         aria-describedby="modal-modal-description"
 >
     <div className='absolute h-screen w-screen bg-[#00000034] z-[100000] flex justify-center items-center'>
-    {<div ref ={modalRef} className='bg-white rounded-md w-max max-w-[900px] h-auto py-8 px-5 relative' >
+    {<div ref ={modalRef} className='bg-white rounded-md w-max max-w-[900px] max-h-[100%] py-8 px-4 relative overflow-y-scroll modal' >
         {children}
-        <div onClick={()=>dispatch(setIsOpen(false))} className='absolute top-4 cursor-pointer right-5'>
+        <div onClick={()=>dispatch(setIsOpen(false))} className='absolute z-[1000] top-4 cursor-pointer right-7'>
             <ImCross color='#000' size={25} />
         </div>
     </div>}

@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from "next/image";
-import {FaFemale} from "react-icons/fa";
+import {FaFemale,FaMale} from "react-icons/fa";
 import {BsFillSuitHeartFill} from "react-icons/bs";
 import {HiChatAlt} from "react-icons/hi";
 import {FaUserFriends} from "react-icons/fa";
@@ -14,7 +14,7 @@ interface ProfileCardProps{
     profile:any
 }
 const ProfileCard = ({profile}:ProfileCardProps) => {
-    const {username,gender,age,bio,interests:{seeking,minAge,maxAge}} = profile
+    const {firstname,lastname,gender,age,bio,interests:{seeking,minAge,maxAge}} = profile
     const router = useRouter();
     const {user} = useAppSelector(state=>state);
     const dispatch = useAppDispatch()
@@ -38,23 +38,23 @@ const ProfileCard = ({profile}:ProfileCardProps) => {
              
         </div>
         <div className='px-4'>
-        <div className='flex gap-1 items-center'>
-            <h1 onClick={()=>{router.push("/user/2")}} className='text-xl capitalize cursor-pointer font-sans hover:underline font-bold tracking-wider text-[#684007]'>{username}</h1>
-            <FaFemale size={26} color='#684007'/>
+        <div onClick={()=>{handleViewProfile()}} className='transition-all duration-200 ease-in-out hover:scale-[1.001] cursor-pointer flex py-1 gap-4 items-center justify-between my-2 shadow-xl px-2 ml-[-0.5rem] rounded-fsull'>
+            <h1  className='text-2xl mb-2 capitalize cursor-pointer font-serif hover:underline font-bold tracking-wider text-black'>{firstname}{" "}{lastname}</h1>
+            {gender==="Male"?<FaMale className='cursor-pointer' size={38} color='#2a4bb9fb'/>:<FaFemale className='cursor-pointer' size={38} color='#ec0d45f9'/>}
         </div>
-        <div className=''>
-            <p className='text-[#00000093] font-semibold text-lg'>{age}<span>,{" "}</span><span>{bio}</span> </p>
+        <div className='flex items-center mt-2'>
+            <p className='text-black font-bold text-xl'>{age}{" . "}<span className='text-lg ml-1 text-[#000000b7]' >{bio}</span> </p>
         </div>
         <div className='my-2 text-[18px]'>
-            <p className='text-[#000000dc] font-[500] my-1 tracking-wide'>Seeking: {seeking}: {minAge} - {maxAge}</p>
-            <p className='text-[#000000ab] text-sm mt-[-4px] '>{"4 hours ago"}</p>
+            <p className='text-[#000000ea] font-semibold my-1 tracking-wide'>Seeking: {seeking}: {minAge} - {maxAge}</p>
+            <p className='text-[#000000c7] text-sm font-semibold mt-[-4px] '>{"4 hours ago"}</p>
         </div>
         </div>
         <div className='flex justify-around flex-wrap justify-self-end items-center gap-2 px-2'>
             <BsFillSuitHeartFill  className='text-[34px] hover:scale-110 text-[#000000ab] hover:text-female cursor-pointer' />
-            <HiChatAlt  className='text-[34px] hover:scale-110 text-[#000000ab] hover:text-blue-500 cursor-pointer' />
+            <HiChatAlt  className='text-[34px] hover:scale-110 text-[#000000ab] hover:text-blue-700 cursor-pointer' />
             <FaUserFriends className='text-[34px] hover:scale-110 text-[#000000ab] hover:text-red-900 cursor-pointer' />
-            <Button onClick={()=>handleViewProfile()}  bg='#684007' size='sm' >View Profile</Button>
+            <Button onClick={()=>handleViewProfile()}  bg='#000' size='sm' >View Profile</Button>
         </div>
     </div>
   )

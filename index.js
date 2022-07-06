@@ -41,6 +41,7 @@ app.get("/:filename",(req,res,next)=>{
 // Routes
 app.use("/auth", require("./routes/auth"));
 app.use("/user", require("./routes/user"));
+app.use("/profile", require("./routes/profile"));
 app.use("/subs", require("./routes/subs"));
 
 

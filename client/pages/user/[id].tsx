@@ -24,7 +24,7 @@ const User = () => {
   return (
     <>
 
-        {profile.profileStatus!=="LOADING"?<Profile/>: <div className='w-screen py-10'><h1 className='text-3xl text-center text-black font-bold'>Loading...</h1></div>  }
+        {profile.profilesStatus!=="LOADING"?<Profile/>: <div className='w-screen py-10'><h1 className='text-3xl text-center text-black font-bold'>Loading...</h1></div>  }
 
     </>
   )

@@ -9,8 +9,9 @@ import * as Yup from "yup";
 import Button from "../Button";
 import profile from "./Profile.module.css";
 import { country_list } from "../../utils/country";
+import { useAppSelector } from "../../redux/hooks";
 interface profileDataProps {
-  image1?: any;
+  profileImage: any;
   bio: string;
   country: string;
   state: string;
@@ -36,9 +37,10 @@ const CreateProfile = () => {
   const [proImage, setProImage] = useState<any>();
   const [step, setStep] = useState<number>(1);
   const [errorMsg, setErrorMsg] = useState<string>();
+  const {user} = useAppSelector(state=>state);
   const formik: FormikProps<profileDataProps> = useFormik<profileDataProps>({
     initialValues: {
-      image1: undefined,
+      profileImage: undefined,
       bio: "",
       country: "",
       state: "",
@@ -49,8 +51,21 @@ const CreateProfile = () => {
       maxAge: "",
     },
     onSubmit: async (values, { resetForm }) => {
-      console.log(values);
-      resetForm();
+      console.log({...values})
+      const data = new FormData();
+      data.append("profileImage",values.profileImage);
+      console.log(data);
+      await instance.post("/user/createProfile",{...values},{
+        headers:{
+          Authorization:user.token,
+          'Content-Type': `multipart/form-data`
+        }
+      }).then(res=>console.log(res.data))
+      .catch(err=>{
+        console.log(err);
+      })
+      // resetForm();
+      // setProImage(undefined)
     },
     validationSchema: profileValidateSchema,
   });
@@ -71,7 +86,7 @@ const CreateProfile = () => {
             <div className="flex flex-col  w-full items-center">
               <label
                 className="w-[200px] h-auto cursor-pointer flex flex-col items-center hover:scale-105 transition-all duration-200 ease-out shadow-2xl  rounded-lg my-3 relative  overflow-hidden justify-between "
-                htmlFor="image"
+                htmlFor="profileImage"
               >
                 <div
                   className={`w-[200px] flex justify-center items-center rounded-full h-[200px] overflow-hidden shadow-2xl relative`}
@@ -87,18 +102,18 @@ const CreateProfile = () => {
                   className={`flex w-full px-2 justify-between items-center mt-2 bg-black text-white h-[50px]`}
                 >
                   <p className="text-lg">
-                    {formik.values.image1
+                    {formik.values.profileImage
                       ? "Choose Another ?"
                       : "Add Your Image"}
                   </p>
-                  {formik.values.image1 ? (
+                  {formik.values.profileImage ? (
                     <HiOutlineCheckCircle size={26} color={"#fff"} />
                   ) : (
                     <CgProfile size={26} color={"#fff"} />
                   )}
                 </div>
                 <input
-                  onBlur={() => formik.handleBlur("image1")}
+                  onBlur={() => formik.handleBlur("profileImage")}
                   onChange={(e: any) => {
                     const reader = new FileReader();
                     reader.onload = () => {
@@ -106,12 +121,12 @@ const CreateProfile = () => {
                         setProImage(reader.result);
                       }
                     };
-                    formik.setFieldValue("image1", e.currentTarget.files[0]);
+                    formik.setFieldValue("profileImage", e.currentTarget.files[0]);
                     reader.readAsDataURL(e.currentTarget.files[0]);
                   }}
-                  name="image1"
+                  name="profileImage"
                   className="hidden"
-                  id="image"
+                  id="profileImage"
                   type="file"
                 />
               </label>

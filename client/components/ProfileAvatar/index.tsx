@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Avatar, IconButton, Menu,MenuItem, Tooltip, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { logout } from '../../redux/slices/userSlice';
 import { useRouter } from 'next/router';
+import instance from '../../utils/axios';
 const ProfileAvatar = () => {
+  const [imgUrl,setImgUrl] = useState<string>("")
   const router = useRouter();
   const {user} = useAppSelector(state=>state);
   const dispatch = useAppDispatch()
@@ -15,11 +17,21 @@ const ProfileAvatar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const fetchImgUrl = async()=>{
+    await instance.get(`/profile/getProfileImage/${user.user.id}`,{
+        headers:{
+            Authorization:user.token
+        }
+    }).then(res=>setImgUrl(res.data))
+}
+useEffect(()=>{
+    fetchImgUrl();
+},[])
   return (
     <>
     <Tooltip title="Open settings">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar sx={{width:"40px",height:"40px"}}  alt="" src="/assets/democard1.jpg" />
+            {imgUrl?<Avatar sx={{width:"40px",height:"40px"}}  alt="" src={`https://ave-dating-site.herokuapp.com/images/${imgUrl}`} />:<Avatar sx={{width:"40px",height:"40px"}}  alt="" src="/assets/blankcard.jpg" />}
           </IconButton>
         </Tooltip>
         <Menu

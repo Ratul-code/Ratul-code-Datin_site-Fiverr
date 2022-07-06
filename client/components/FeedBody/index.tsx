@@ -10,12 +10,13 @@ interface feedProps {
   profiles: any[];
 }
 const FeedBody = ({ profiles }: feedProps) => {
+  const {profile:{profilesStatus}} = useAppSelector(state=>state);
   const [isOrderBy, setIsOrderBy] = useState(false);
   const [orderBy, setOrderBy] = useState<string>("Relevance");
   const orderByRef = useOutsideClick(() => {
     setIsOrderBy(false);
   });
-  if (profiles.length) {
+  if (profilesStatus==="IDLE") {
     return (
       <div className="p-5">
         <Modal>

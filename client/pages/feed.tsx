@@ -13,7 +13,7 @@ const Feed = () => {
   const {user} = useAppSelector(state=>state);
   const[profiles,setProfiles] = useState<any[]>([]);
   const fetchProfiles = async ()=>{
-    const {data} = await instance.get(`/user/getProfiles`,{
+    const {data} = await instance.get(`/profile/getProfiles`,{
       headers:{
           Authorization:user.token,
       }

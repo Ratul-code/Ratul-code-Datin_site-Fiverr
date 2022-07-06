@@ -15,7 +15,7 @@ const FeedModal = () => {
         </div>
         <div>
             <p className='text-xl my-2 font-semibold text-center'>
-                You can not visit others profile. You must be a member first.
+                You can not like others profile. You must be a member first.
             </p>
         </div>
 

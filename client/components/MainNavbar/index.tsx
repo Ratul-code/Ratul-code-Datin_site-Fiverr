@@ -58,7 +58,7 @@ const MainNavbar = () => {
             </li>
         </ul>
         <div className="hidden lg:inline-flex">
-        <ProfileAvatar/>
+        <ProfileAvatar  />
         </div>
 
         <div className={navbar.menubar}>

@@ -1,10 +1,10 @@
 import { ActionReducerMapBuilder, createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import instance from "../../utils/axios";
 interface profileSliceStateType{
-    profileStatus:"IDLE"|"LOADING",
+    profilesStatus:"IDLE"|"LOADING",
     profile?:any,
     myProfile:boolean,
-    profileModalState:"CREATING"|"UPDATING"|"WARNING"
+    profileModalState:"CREATING"|"UPDATING"|"WARNING"|"LIKEDUSER"
 }
 
 interface fetchProfileTypes{
@@ -14,18 +14,18 @@ interface fetchProfileTypes{
 
 
 export const fetchProfile = createAsyncThunk("profile",async ({token,userId}:fetchProfileTypes)=>{
-        const {data} = await instance.get(`/user/getProfile/${userId}`,{
+        const {data} = await instance.get(`/profile/getProfile/${userId}`,{
             headers:{
                 Authorization:token
             }
         });
-        console.log(data);
+        console.log(data.response);
         return data      
 });
 
 
 const initialState:profileSliceStateType = {
-    profileStatus:"IDLE",
+    profilesStatus:"IDLE",
     myProfile:false,
     profileModalState:"WARNING"
 }
@@ -42,12 +42,15 @@ const profileSlice = createSlice({
     extraReducers:(builder:ActionReducerMapBuilder<profileSliceStateType>)=>{
         builder
         .addCase(fetchProfile.pending,(state)=>{
-            state.profileStatus="LOADING"
+            state.profilesStatus="LOADING"
         })
         .addCase(fetchProfile.fulfilled,(state,action)=>{
-            state.profileStatus="IDLE"
+            state.profilesStatus="IDLE"
             state.myProfile = action.payload.myProfile
             state.profile = action.payload.profile
+        })
+        .addCase(fetchProfile.rejected,(state,action)=>{
+            state.profilesStatus="IDLE"
         });
     }
 })

@@ -49,6 +49,7 @@ age:{
       },
       createdAt: {
         type: Date,
+        default:new Date().toISOString()
       },
     },
   ],

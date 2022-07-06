@@ -5,18 +5,21 @@ const userSchema = new mongoose.Schema({
     firstname:{
         type:String,
         trim:true,
+        unique:false,
         required:[true,"Please provide your firstname"],
         maxlength:[20,"firstname can not be more than 20 character"],
     },
     lastname:{
         type:String,
         trim:true,
+        unique:false,
         required:[true,"Please provide a lastname"],
         maxlength:[20,"lastname can not be more than 20 character"],
     },
     username:{
         type:String,
         trim:true,
+        unique:false,
         required:[true,"Please provide a username"],
         maxlength:[20,"username can not be more than 20 character"],
     },

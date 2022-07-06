@@ -35,7 +35,7 @@ const profileSlice = createSlice({
     name:"profile",
     initialState,
     reducers:{
-        setProfileModalState(state,action:PayloadAction<"CREATING"|"UPDATING"|"WARNING">){
+        setProfileModalState(state,action:PayloadAction<"CREATING"|"UPDATING"|"WARNING"|"LIKEDUSER">){
             state.profileModalState = action.payload
         }
     },

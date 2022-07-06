@@ -40,7 +40,7 @@ const ProfileIntro = () => {
   const handleLike = async () => {
       if (myProfile) {
         dispatch(setIsOpen(true));
-        dispatch(setProfileModalState("LIKEDUSER"));
+        dispatch(setProfileModalState("LIKEDUSER"))
       } else {
         if (!user.plan) {
           dispatch(setIsOpen(true));

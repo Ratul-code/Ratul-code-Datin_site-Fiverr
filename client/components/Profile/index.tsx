@@ -18,6 +18,7 @@ const Profile = () => {
   const router = useRouter();
   const {user:{user},profile:{myProfile,profile}} = useAppSelector(state=>state);
   const dispatch = useAppDispatch(); 
+  console.log(profile);
   return (
     <>
       <MainNavbar />

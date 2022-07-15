@@ -17,6 +17,7 @@ const ProfileIntro = () => {
   const [likedUser, setLikedUser] = useState(false);
   const [liked, setLiked] = useState<boolean>(false);
   const [checklikedStatus, setChecklikedStatus] = useState<string>("IDLE");
+  const [currentTab,setCurrentTab] = useState<"about"|"interested">("about")
   const [noOfLikes, setNoOfLikes] = useState<number | undefined>(
     profile?.likes?.length || 0
   );
@@ -81,7 +82,7 @@ const ProfileIntro = () => {
       checkLike();
     }
   }, []);
-  console.log(likedUser);
+  console.log(profile);
   return (
     <div className="flex flex-col gap-10 justify-start w-full relative">
       <div ref={infoRef} className="absolute top-0 right-0">
@@ -121,36 +122,43 @@ const ProfileIntro = () => {
 
       <div>
         <div className="flex gap-4 flex-col ">
-          <h1 className="text-[30px] max-w-[359px] font-sans font-bold tracking-wider capitalize">
+          <h1 className="text-[30px] max-w-[359px] font-cursive font-bold tracking-wider capitalize">
             {profile?.firstname} {profile?.lastname}
           </h1>
-          <div className="flex gap-1">
+          {/* <div className="flex gap-1">
             <FaMedal size={23} color="#684007 " />
             <FaMedal size={23} color="#684007 " />
             <FaMedal size={23} color="#684007 " />
-          </div>
+          </div> */}
         </div>
         <div className=" mt-4">
-          <p className="text-md max-w-[650px] text-gray-600 font-semibold font-sans  leading-[20px]">
+          <p className="text-xl max-w-[650px] text-gray-600 font-semibold font-cursive tracking-wider leading-[34px]">
             {profile?.bio}
           </p>
         </div>
       </div>
       <div className="flex flex-col gap-5 mt-[-14px]">
         <ul className="flex gap-7 items-center flex-wrap  ">
-          <li className="text-xl cursor-pointer font-semibold">Interested</li>
-          <li className="text-xl cursor-pointer text-[#853227] underline font-bold">
+          <li onClick={()=>setCurrentTab("interested")} className={`text-xl tracking-widest font-cursive   cursor-pointer ${currentTab==="interested"?"text-[#853227]":"text-black"} underline font-bold`}>Interested</li>
+          <li onClick={()=>setCurrentTab("about")} className={`text-xl tracking-widest font-cursive  cursor-pointer ${currentTab==="about"?"text-[#853227]":"text-black"} underline font-bold`}>
             About Me
           </li>
         </ul>
         <div className="flex flex-wrap mt-[-10px] ml-[-12px] justify-start w-full gap-3 max-w-[400px] text-black  ">
-          {profile?.about &&
+          {currentTab==="about"?(profile?.about &&
             Object.keys(profile.about).map((info, index) => (
-              <h3 key={index} className="text-sm mx-3 font-semibold capitalize">
+              <h3 key={index} className="tracking-wider mx-3 font-semibold font-cursive text-lg capitalize">
                 {info}:{" "}
                 <span className=" text-gray-600 ">{profile?.about[info]}</span>
               </h3>
-            ))}
+            ))):
+           ( profile?.interests &&
+            Object.keys(profile.interests).map((info, index) => (
+              <h3 key={index} className="tracking-wider mx-3 font-semibold font-cursive text-lg capitalize">
+                {info}:{" "}
+                <span className=" text-gray-600 ">{profile?.interests[info]}</span>
+              </h3>
+            )))}
         </div>
       </div>
       <div className="flex flex-col gap-8">

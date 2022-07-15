@@ -3,7 +3,8 @@ import instance from "../../utils/axios";
 interface userSliceStateType{
     token:string,
     plan:any,
-    user?:any
+    user?:any,
+    profileImage?:string,
 }
 const initialState:userSliceStateType = {
     token:"",

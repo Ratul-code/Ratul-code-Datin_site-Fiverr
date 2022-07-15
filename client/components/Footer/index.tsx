@@ -14,10 +14,10 @@ const Footer = () => {
                     <li> <Link href={"#"}>Millionaire Datin</Link> </li>
                     <li> <Link href={"#"}>Rich Men Dating</Link> </li>
                     <li> <Link href={"#"}>Rich Women Dating</Link> </li>
-                    <li> <Link href={"#"}>Millionaire Matchmaking</Link> </li>
-                    <li> <Link href={"#"}>Millionaire Matchmake</Link> </li>
+                    <li> <Link href={"#"}>Accurate Matchmaking</Link> </li>
+                    {/* <li> <Link href={"#"}>Millionaire Matchmake</Link> </li> */}
                     <li> <Link href={"#"}>Luxury Lifestyle Blog</Link> </li>
-                    <li> <Link href={"#"}>MM Upscale Guides</Link> </li>
+                    <li> <Link href={"#"}>AWM Upscale Guides</Link> </li>
                 </ul>
             </div>
             <div>
@@ -26,10 +26,11 @@ const Footer = () => {
                     <li> <Link href={"#"}>United States</Link> </li>
                     <li> <Link href={"#"}>Canada</Link> </li>
                     <li> <Link href={"#"}>United Kingdom</Link> </li>
+                    <li> <Link href={"#"}>Australia</Link> </li>
                     <li> <Link href={"#"}>Germany</Link> </li>
                 </ul>
             </div>
-            <div>
+            {/* <div>
                 <h1 className='font-semibold  uppercase'>LOCAL DATING</h1>
                 <ul className={`mt-6 text-xs flex flex-col gap-2 ${footer.footer_links}`}>
                     <li> <Link href={"#"}>Los Angeles</Link> </li>
@@ -37,7 +38,7 @@ const Footer = () => {
                     <li> <Link href={"#"}>Dallas</Link> </li>
                     <li> <Link href={"#"}>Chicago</Link> </li>
                 </ul>
-            </div>
+            </div> */}
             <div>
                 <h1 className='font-semibold  uppercase'>COMPANY</h1>
                 <ul className={`mt-6 text-xs flex flex-col gap-2 ${footer.footer_links}`}>
@@ -49,23 +50,10 @@ const Footer = () => {
                     <li> <Link href={"#"}>Privacy Policy</Link> </li>
                 </ul>
             </div>
-            <div>
-                <h1 className='font-semibold  uppercase'>UNIQUE FEATURES</h1>
-                <ul className={`mt-6 text-xs flex flex-col gap-2 ${footer.footer_links}`}>
-                    <li> <Link href={"#"}>Spark</Link> </li>
-                    <li> <Link href={"#"}>CERTIFIED MILLIONAIRE™</Link> </li>
-                    <li> <Link href={"#"}>Live MM Counselor</Link> </li>
-                    <li> <Link href={"#"}>Members Luxuries</Link> </li>
-                    <li> <Link href={"#"}>Celebrity Interviews</Link> </li>
-                    <li> <Link href={"#"}>24/7 Phone Service</Link> </li>
-                    <li> <Link href={"#"}>How to Succeed in Business / Career</Link> </li>
-                    <li> <Link href={"#"}>How to Keep Your Body in Shape</Link> </li>
-                    <li> <Link href={"#"}>Volunteer Opportunities</Link> </li>
-                </ul>
-            </div>
+
             <div>
                 <h1 className='font-semibold  uppercase mb-6'>Follow us</h1>
-                <div className='mt-6 flex justify-between'>
+                <div className='mt-6 flex gap-4 justify-between'>
                     <div className='cursor-pointer'>
                     <FaFacebookF/>
                     </div>

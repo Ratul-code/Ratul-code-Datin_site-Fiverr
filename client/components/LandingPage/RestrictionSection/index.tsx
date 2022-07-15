@@ -10,7 +10,7 @@ const index = () => {
                 <div className='w-[50%] h-[4px] bg-secondary rounded-[2px]'></div>
             </div>
             <div>
-                <p className='text-[24px] text-[#1b1b1b] opacity-90 tracking-wide mt-6'>Searching for a sugar daddy or any other inappropriate relationships is strictly prohibited on <span className="font-semibold uppercase">Affluent Meets Elegant</span>.</p>
+                {/* <p className='text-[24px] text-[#1b1b1b] opacity-90 tracking-wide mt-6'>Searching for a sugar daddy or any other inappropriate relationships is strictly prohibited on <span className="font-semibold uppercase">Affluent Meets Elegant</span>.</p> */}
                 <p className='text-[24px] text-[#1b1b1b] opacity-90 tracking-wide mt-6'>Affluent Meets Elegant is one of the first dating sites for high-quality singles. If you have high expectations, <span className="font-semibold uppercase">Affluent Meets Elegant</span> is the best place for you.</p>
             </div>
         </div>
